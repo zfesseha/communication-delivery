@@ -5,6 +5,8 @@ import com.chronicle.communications.common.config.JacksonConfig;
 import com.chronicle.communications.common.model.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,7 @@ public class QueueingServiceTest {
     @Autowired
     private ObjectMapper objectMapper;
 
+    // TODO: Update with actual test.
     @Test
     public void service() throws Exception {
         UUID communicationId = UUID.randomUUID();
@@ -49,31 +52,20 @@ public class QueueingServiceTest {
                 ))
                 .createdAt(OffsetDateTime.now())
                 .build();
-        // UUID id();
-        ////    UUID clientId();
-        ////    Optional<UUID> communicationId();
-        ////    CommunicationType type();
-        ////    Optional<String> content();
-        ////    Optional<String> segmentId();
-        ////    Optional<UUID> batchId();
-        ////    Set<String> recipients();
-        ////    Optional<String> source();
-        ////    Map<String, String> metadata();
-        ////    Optional<OffsetDateTime> requestTime();
-        ////    Optional<OffsetDateTime> createdAt();
+
         CommunicationRequest request = ImmutableCommunicationRequest.builder()
                 .id(UUID.randomUUID())
-//                .clientId(UUID.randomUUID())
-//                .communicationId(UUID.randomUUID())
-//                .type(EMAIL)
-//                .content("Request Content")
-//                .segmentId("requestSegmentId")
-//                .batchId(UUID.randomUUID())
-//                .recipients(ImmutableSet.of("abc@gmail.com", "123@email.com"))
-//                .source("API Request")
-//                .metadata(ImmutableMap.of("key", "value", "meta", "data"))
-//                .requestTime(OffsetDateTime.now().minusDays(1).minusHours(3))
-//                .createdAt(OffsetDateTime.now())
+                .clientId(UUID.randomUUID())
+                .communicationId(UUID.randomUUID())
+                .type(EMAIL)
+                .content("Request Content")
+                .segmentId("requestSegmentId")
+                .batchId(UUID.randomUUID())
+                .recipients(ImmutableSet.of("abc@gmail.com", "123@email.com"))
+                .source("API Request")
+                .metadata(ImmutableMap.of("key", "value", "meta", "data"))
+                .requestTime(OffsetDateTime.now().minusDays(1).minusHours(3))
+                .createdAt(OffsetDateTime.now())
                 .build();
         // TODO: Remove
         System.out.println(objectMapper.writeValueAsString(communication));

@@ -6,10 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.immutables.value.Value;
 
 import java.time.OffsetDateTime;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Value.Immutable
 @JsonSerialize(as = ImmutableCommunicationRequest.class)
@@ -22,7 +19,7 @@ public interface CommunicationRequest {
     Optional<String> content();
     Optional<String> segmentId();
     Optional<UUID> batchId();
-    Optional<List<String>> recipients();
+    Optional<Set<String>> recipients();
     Optional<String> source();
     Optional<Map<String, String>> metadata();
     Optional<OffsetDateTime> requestTime();

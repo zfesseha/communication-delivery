@@ -1,0 +1,13 @@
+communications:
+  queueing:
+    destination:
+      email: communications.delivery.email
+  delivery:
+    email: communications.delivery.email
+
+spring:
+  activemq:
+    broker-url: tcp://localhost:61616
+    pool:
+      max-connections: 10
+      enabled: true

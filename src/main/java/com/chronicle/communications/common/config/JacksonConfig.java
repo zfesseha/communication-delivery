@@ -17,8 +17,11 @@ import java.util.TimeZone;
 @Configuration
 public class JacksonConfig /*implements ApplicationListener<ObjecMappConfigured> TODO: Swagger*/ {
 
-    @Autowired
     private Clock clock;
+
+    public JacksonConfig(Clock clock) {
+        this.clock = clock;
+    }
 
     @Bean
     // TODO: What is this?

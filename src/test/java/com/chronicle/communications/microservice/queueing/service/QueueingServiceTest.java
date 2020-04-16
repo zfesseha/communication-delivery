@@ -1,4 +1,4 @@
-package com.chronicle.communications.microservice.clientapi.service;
+package com.chronicle.communications.microservice.queueing.service;
 
 import com.chronicle.communications.common.config.BaseConfig;
 import com.chronicle.communications.common.config.JacksonConfig;

@@ -1,6 +1,7 @@
 package com.chronicle.communications.microservice.clientapi.service.impl;
 
-import com.chronicle.communications.common.model.*;
+import com.chronicle.communications.common.model.CommunicationRequest;
+import com.chronicle.communications.common.model.ImmutableCommunicationRequest;
 import com.chronicle.communications.microservice.clientapi.service.CommunicationRequestService;
 import com.chronicle.communications.microservice.queueing.QueuingServiceClient;
 import org.springframework.stereotype.Component;

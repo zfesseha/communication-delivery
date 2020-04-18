@@ -2,9 +2,11 @@ package com.chronicle.communications.microservice.queueing.service;
 
 import com.chronicle.communications.common.config.BaseConfig;
 import com.chronicle.communications.common.config.JacksonConfig;
-import com.chronicle.communications.common.model.*;
+import com.chronicle.communications.common.model.Communication;
+import com.chronicle.communications.common.model.CommunicationRequest;
+import com.chronicle.communications.common.model.ImmutableCommunication;
+import com.chronicle.communications.common.model.ImmutableCommunicationRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import org.junit.Test;
@@ -17,7 +19,6 @@ import java.time.OffsetDateTime;
 import java.util.UUID;
 
 import static com.chronicle.communications.common.model.enums.CommunicationType.EMAIL;
-import static com.chronicle.communications.common.model.enums.RecipientType.EMAIL_ADDRESS;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {

@@ -4,7 +4,7 @@ import com.chronicle.communications.common.CommunicationDeliveryException;
 import com.chronicle.communications.common.model.Communication;
 import com.chronicle.communications.common.model.CommunicationRequest;
 import com.chronicle.communications.common.model.ImmutableCommunication;
-import com.chronicle.communications.microservice.queueing.service.QueueingService;
+import com.chronicle.communications.common.service.queue.QueueingService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

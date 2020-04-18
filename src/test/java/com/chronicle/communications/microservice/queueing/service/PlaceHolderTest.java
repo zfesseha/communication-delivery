@@ -24,7 +24,7 @@ import static com.chronicle.communications.common.model.enums.RecipientType.EMAI
         BaseConfig.class,
         JacksonConfig.class
 })
-public class QueueingServiceTest {
+public class PlaceHolderTest {
 
     @Autowired
     private ObjectMapper objectMapper;

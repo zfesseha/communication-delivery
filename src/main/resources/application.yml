@@ -1,7 +1,10 @@
 communications:
+  client-api:
+    request-queue: communications.request
   queueing:
     destination:
       email: communications.delivery.email
+    source: communications.request
   delivery:
     email: communications.delivery.email
 

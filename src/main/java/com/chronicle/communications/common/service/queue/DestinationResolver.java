@@ -1,4 +1,4 @@
-package com.chronicle.communications.microservice.queueing.service;
+package com.chronicle.communications.common.service.queue;
 
 import com.chronicle.communications.common.model.Communication;
 

@@ -1,7 +1,7 @@
-package com.chronicle.communications.microservice.queueing.service.impl;
+package com.chronicle.communications.common.service.queue.impl;
 
 import com.chronicle.communications.common.model.Communication;
-import com.chronicle.communications.microservice.queueing.service.DestinationResolver;
+import com.chronicle.communications.common.service.queue.DestinationResolver;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 

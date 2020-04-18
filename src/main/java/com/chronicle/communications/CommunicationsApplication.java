@@ -14,4 +14,7 @@ public class CommunicationsApplication {
 
 	// TODO: Logging config
 	// TODO: Global error handling
+	// TODO: Figure out why collections in API models have to be wrapped with Optional
+	// TODO: Test Coverage
+	// TODO: Checkstyle
 }

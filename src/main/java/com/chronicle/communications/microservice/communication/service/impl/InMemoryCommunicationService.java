@@ -1,10 +1,10 @@
 package com.chronicle.communications.microservice.communication.service.impl;
 
-import com.chronicle.communications.common.model.Communication;
-import com.chronicle.communications.common.model.CommunicationRequest;
-import com.chronicle.communications.common.model.ImmutableCommunication;
-import com.chronicle.communications.common.model.ImmutableCommunicationRequest;
+import com.chronicle.communications.common.CommunicationDeliveryException;
+import com.chronicle.communications.common.model.*;
+import com.chronicle.communications.common.model.enums.CommunicationEvent;
 import com.chronicle.communications.microservice.communication.service.CommunicationService;
+import com.google.common.collect.ImmutableList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,10 @@ import org.springframework.stereotype.Service;
 import java.time.OffsetDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
+
+import static com.chronicle.communications.common.model.enums.CommunicationEvent.CREATED;
 
 @Service
 public class InMemoryCommunicationService implements CommunicationService {
@@ -40,8 +43,51 @@ public class InMemoryCommunicationService implements CommunicationService {
                 )
                 .createdAt(now)
                 .build();
+        communication = withLogEvent(communication, CREATED, null);
         storage.put(id, communication);
         LOGGER.info("Created new Communication with ID: {}, Communication: {}", id, communication);
+        return communication;
+    }
+
+    @Override
+    public Communication logEvent(UUID communicationId, CommunicationEvent event) {
+        return logEvent(communicationId, event, null);
+    }
+
+    @Override
+    public Communication logEvent(UUID communicationId, CommunicationEvent event, Map<String, String> metadata) {
+        Communication communication = withLogEvent(getCommunication(communicationId), event, metadata);
+        storage.put(communicationId, communication);
+        LOGGER.info("Successfully saved log event for communication with ID: {}, {}", communicationId, communication);
+        return communication;
+    }
+    
+    private Communication withLogEvent(Communication communication, CommunicationEvent event, Map<String, String> metadata) {
+        ImmutableCommunicationLog communicationLog = ImmutableCommunicationLog.builder()
+                .id(UUID.randomUUID())
+                .communicationId(communication.id())
+                .event(event)
+                .metadata(Optional.ofNullable(metadata))
+                .createdAt(OffsetDateTime.now())
+                .build();
+        return ImmutableCommunication.builder()
+                .from(communication)
+                .logs(ImmutableList.<CommunicationLog>builder()
+                        .addAll(communication.logs().orElse(ImmutableList.of()))
+                        .add(communicationLog)
+                        .build())
+                // TODO: Add back
+//                .addLogs(communicationLog
+//                )
+                .build();
+    }
+
+    private Communication getCommunication(UUID communicationId) {
+        Communication communication = storage.get(communicationId);
+        if (communication == null) {
+            throw new CommunicationDeliveryException("Communication with ID: " + communicationId + " cannot be found.");
+        }
+        LOGGER.debug("Successfully retrieved communication for ID: {}, {}", communicationId, communication);
         return communication;
     }
 }

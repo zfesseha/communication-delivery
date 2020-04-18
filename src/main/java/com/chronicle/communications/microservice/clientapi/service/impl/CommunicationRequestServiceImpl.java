@@ -16,6 +16,8 @@ import org.springframework.stereotype.Component;
 
 import java.time.OffsetDateTime;
 
+import static com.chronicle.communications.common.model.enums.CommunicationEvent.QUEUED_FOR_PROCESSING;
+
 @Component
 public class CommunicationRequestServiceImpl implements CommunicationRequestService {
 

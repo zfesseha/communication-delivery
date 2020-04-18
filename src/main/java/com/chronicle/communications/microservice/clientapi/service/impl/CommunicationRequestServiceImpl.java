@@ -7,7 +7,7 @@ import com.chronicle.communications.common.model.ImmutableCommunication;
 import com.chronicle.communications.common.model.ImmutableCommunicationRequest;
 import com.chronicle.communications.common.service.queue.QueueingService;
 import com.chronicle.communications.microservice.clientapi.service.CommunicationRequestService;
-import com.chronicle.communications.microservice.scheduling.SchedulingServiceClient;
+import com.chronicle.communications.microservice.scheduling.SchedulingMicroService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +21,7 @@ public class CommunicationRequestServiceImpl implements CommunicationRequestServ
 
     private QueueingService queueingService;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SchedulingServiceClient.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(SchedulingMicroService.class);
 
     public CommunicationRequestServiceImpl(@Qualifier("requestQueueingService") QueueingService queueingService) {
         this.queueingService = queueingService;

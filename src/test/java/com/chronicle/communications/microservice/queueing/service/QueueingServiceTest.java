@@ -35,26 +35,12 @@ public class QueueingServiceTest {
         UUID communicationId = UUID.randomUUID();
         Communication communication = ImmutableCommunication.builder()
                 .id(communicationId)
-                .type(EMAIL)
                 .sender("sender@gmail.com")
                 .content("This is the content")
-                .clientId(UUID.randomUUID())
-                .segmentId("segmentId")
-                .batchId(UUID.randomUUID())
-                .recipients(ImmutableList.of(
-                        ImmutableRecipient.builder()
-                                .id(UUID.randomUUID())
-                                .communicationId(communicationId)
-                                .type(EMAIL_ADDRESS)
-                                .identifier("recipient@gmail.com")
-                                .createdAt(OffsetDateTime.now())
-                                .build()
-                ))
                 .createdAt(OffsetDateTime.now())
                 .build();
 
         CommunicationRequest request = ImmutableCommunicationRequest.builder()
-                .id(UUID.randomUUID())
                 .clientId(UUID.randomUUID())
                 .communicationId(UUID.randomUUID())
                 .type(EMAIL)

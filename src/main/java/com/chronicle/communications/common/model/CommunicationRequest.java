@@ -15,12 +15,12 @@ import java.util.UUID;
 @JsonSerialize(as = ImmutableCommunicationRequest.class)
 @JsonDeserialize(as = ImmutableCommunicationRequest.class)
 public interface CommunicationRequest {
-    UUID id();
-    UUID clientId();
     Optional<UUID> communicationId();
+    Optional<UUID> clientId();
     CommunicationType type();
     Optional<String> content();
     Optional<String> segmentId();
+    Optional<String> campaignId();
     Optional<UUID> batchId();
     Optional<Set<String>> recipients();
     Optional<String> source();

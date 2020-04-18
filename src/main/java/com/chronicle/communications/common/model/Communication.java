@@ -15,13 +15,9 @@ import java.util.UUID;
 @JsonDeserialize(as = ImmutableCommunication.class)
 public interface Communication {
     UUID id();
-    CommunicationType type();
     Optional<String> content();
     // TODO: Should this be an object type or just String?
     Optional<String> sender();
-    UUID clientId();
-    Optional<String> segmentId();
-    Optional<UUID> batchId();
-    Set<Recipient> recipients();
+    CommunicationRequest communicationRequest();
     Optional<OffsetDateTime> createdAt();
 }

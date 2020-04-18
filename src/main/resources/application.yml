@@ -4,9 +4,15 @@ communications:
   queueing:
     destination:
       email: communications.delivery.email
+      sms: communications.delivery.sms
+      push: communications.delivery.push
+      iam: communications.delivery.iam
     source: communications.request
   delivery:
     email: communications.delivery.email
+    sms: communications.delivery.sms
+    push: communications.delivery.push
+    iam: communications.delivery.iam
 
 spring:
   activemq:

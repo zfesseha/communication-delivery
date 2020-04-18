@@ -8,6 +8,7 @@ import com.chronicle.communications.common.service.queue.QueueingService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
@@ -20,7 +21,7 @@ public class QueuingServiceClient {
     private static final String ERROR_MESSAGE = "ERROR SENDING MESSAGE TO QUEUE";
     private static final Logger LOGGER = LoggerFactory.getLogger(QueuingServiceClient.class);
 
-    public QueuingServiceClient(QueueingService queueingService) {
+    public QueuingServiceClient(@Qualifier("requestQueueingService") QueueingService queueingService) {
         this.queueingService = queueingService;
     }
 

@@ -1,7 +1,7 @@
 package com.chronicle.communications.common.service.queue.activemq;
 
 import com.chronicle.communications.common.model.Communication;
-import com.chronicle.communications.common.service.queue.DestinationResolver;
+import com.chronicle.communications.common.service.queue.destination.DestinationResolver;
 import com.chronicle.communications.common.service.queue.QueueingService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,7 +10,6 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Component;
 
-@Component
 public class ActiveMQQueueingService implements QueueingService {
 
     private DestinationResolver destinationResolver;

@@ -1,13 +1,13 @@
-package com.chronicle.communications.common.service.queue.impl;
+package com.chronicle.communications.common.service.queue.destination.impl;
 
 import com.chronicle.communications.common.model.Communication;
-import com.chronicle.communications.common.service.queue.DestinationResolver;
+import com.chronicle.communications.common.service.queue.destination.DestinationResolver;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 public class SingleDestinationResolver implements DestinationResolver {
-    @Value("${communications.queueing.destination.email}")
+    @Value("${communications.client-api.request-queue}")
     private String destination;
 
     @Override

@@ -1,4 +1,4 @@
-package com.chronicle.communications.microservice.queueing;
+package com.chronicle.communications.microservice.scheduling;
 
 import com.chronicle.communications.common.CommunicationDeliveryException;
 import com.chronicle.communications.common.model.Communication;
@@ -14,14 +14,13 @@ import org.springframework.stereotype.Component;
 import java.util.UUID;
 
 @Component
-public class QueuingServiceClient {
+public class SchedulingServiceClient {
 
     private QueueingService queueingService;
 
-    private static final String ERROR_MESSAGE = "ERROR SENDING MESSAGE TO QUEUE";
-    private static final Logger LOGGER = LoggerFactory.getLogger(QueuingServiceClient.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(SchedulingServiceClient.class);
 
-    public QueuingServiceClient(@Qualifier("requestQueueingService") QueueingService queueingService) {
+    public SchedulingServiceClient(@Qualifier("requestQueueingService") QueueingService queueingService) {
         this.queueingService = queueingService;
     }
 

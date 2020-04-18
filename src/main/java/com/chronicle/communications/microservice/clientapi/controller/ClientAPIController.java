@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/clientapi/v1/communications")
+@RequestMapping("/client-api/v1/communications")
 // TODO: Add Swagger annotations
 // TODO: Change return type of methods
 // TODO: Remove print statements.

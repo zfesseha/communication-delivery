@@ -1,6 +1,6 @@
 package com.chronicle.communications.microservice.delivery.sms;
 
-import com.chronicle.communications.common.CommunicationDeliveryException;
+import com.chronicle.communications.common.exception.CommunicationDeliveryException;
 import com.chronicle.communications.common.model.Communication;
 import com.chronicle.communications.microservice.delivery.common.AbstractDeliveryMicroService;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,6 +1,6 @@
 package com.chronicle.communications.microservice.clientapi.service.impl;
 
-import com.chronicle.communications.common.CommunicationDeliveryException;
+import com.chronicle.communications.common.exception.CommunicationDeliveryException;
 import com.chronicle.communications.common.model.Communication;
 import com.chronicle.communications.common.model.CommunicationRequest;
 import com.chronicle.communications.common.model.ImmutableCommunicationRequest;

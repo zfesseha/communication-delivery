@@ -1,6 +1,6 @@
 package com.chronicle.communications.common.service.queue.destination.impl;
 
-import com.chronicle.communications.common.CommunicationDeliveryException;
+import com.chronicle.communications.common.exception.CommunicationDeliveryException;
 import com.chronicle.communications.common.model.Communication;
 import com.chronicle.communications.common.service.queue.destination.DestinationResolver;
 import org.springframework.beans.factory.annotation.Value;

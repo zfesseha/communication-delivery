@@ -1,6 +1,6 @@
 package com.chronicle.communications.microservice.communication.service.impl;
 
-import com.chronicle.communications.common.CommunicationDeliveryException;
+import com.chronicle.communications.common.exception.NotFoundException;
 import com.chronicle.communications.common.model.*;
 import com.chronicle.communications.common.model.enums.CommunicationEvent;
 import com.chronicle.communications.microservice.communication.service.CommunicationService;
@@ -10,10 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 import static com.chronicle.communications.common.model.enums.CommunicationEvent.CREATED;
 
@@ -61,7 +58,17 @@ public class InMemoryCommunicationService implements CommunicationService {
         LOGGER.info("Successfully saved log event for communication with ID: {}, {}", communicationId, communication);
         return communication;
     }
-    
+
+    @Override
+    public List<Communication> getAll() {
+        return ImmutableList.copyOf(storage.values());
+    }
+
+    @Override
+    public Optional<Communication> get(UUID communicationId) {
+        return Optional.ofNullable(getCommunication(communicationId));
+    }
+
     private Communication withLogEvent(Communication communication, CommunicationEvent event, Map<String, String> metadata) {
         ImmutableCommunicationLog communicationLog = ImmutableCommunicationLog.builder()
                 .id(UUID.randomUUID())
@@ -85,7 +92,7 @@ public class InMemoryCommunicationService implements CommunicationService {
     private Communication getCommunication(UUID communicationId) {
         Communication communication = storage.get(communicationId);
         if (communication == null) {
-            throw new CommunicationDeliveryException("Communication with ID: " + communicationId + " cannot be found.");
+            throw new NotFoundException(communicationId, "Communication");
         }
         LOGGER.debug("Successfully retrieved communication for ID: {}, {}", communicationId, communication);
         return communication;

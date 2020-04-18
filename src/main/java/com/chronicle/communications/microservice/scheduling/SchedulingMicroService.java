@@ -1,6 +1,6 @@
 package com.chronicle.communications.microservice.scheduling;
 
-import com.chronicle.communications.common.CommunicationDeliveryException;
+import com.chronicle.communications.common.exception.CommunicationDeliveryException;
 import com.chronicle.communications.common.model.Communication;
 import com.chronicle.communications.common.service.queue.QueueingService;
 import com.fasterxml.jackson.core.JsonProcessingException;

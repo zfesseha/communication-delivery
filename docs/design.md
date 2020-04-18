@@ -18,7 +18,7 @@
       - [Communciation Service](#communciation-service)
         * [CommunicationLog Events](#communicationlog-events)
       - [Message Service](#message-service)
-      - [Queueing Service](#queueing-service)
+      - [Scheduling Service](#queueing-service)
       - [Delivery Services](#delivery-services)
     + [Additional Notes](#additional-notes)
   * [Monitoring](#monitoring)
@@ -64,13 +64,13 @@ Here's a brief enumeration of the various steps in the delivery pipeline a typic
 		- The file is moved into object storage such as AWS S3.
 		- A File Ingestion Service listening to the object storage picks up the file, validates it and extracts communication requests.
 		- The File Ingestion Service initiates each valid communication request via the Communication Service and sends it to the Request Queues.
-3. An instance of the Queuing Services reads the request from a queue and decides what to do with it based on multiple criteria, such as the clientId, the priority level of the queue from which the message was read, the status of the request i.e. was this request attempted before (retry) or is it brand new? ... etc. Based on the criteria,
+3. An instance of the Scheduling Services reads the request from a queue and decides what to do with it based on multiple criteria, such as the clientId, the priority level of the queue from which the message was read, the status of the request i.e. was this request attempted before (retry) or is it brand new? ... etc. Based on the criteria,
 	- If it's a new request,
-		- The Queueing Service calls the Message Service to retrieve the fully rendered message content to be delivered.
+		- The Scheduling Service calls the Message Service to retrieve the fully rendered message content to be delivered.
 		- The Message Service marks the communication as rendered.
 	- If it's a previously failed request,
 		- The Service determines if a retry is warranted and if not, marks the communication as undeliverable.
-	- For both new and old requests, the Queueing Service either:
+	- For both new and old requests, the Scheduling Service either:
 		- sends the request to the appropriate queue immediately and marks it as queued, or
 		- schedules the request to be sent to a queue at a later time and marks it as scheduled via the Communication Service.
 4. An instance of the appropriate Delivery Service picks up the message and does the following:
@@ -142,8 +142,9 @@ The data model lends itself very well to a NoSQL DB if that's desirable. This al
 For each of the following events, a CommunicationLog with an event of the same name is persisted related to the Communication by ID.
 
 - `CREATED`: CommunicationRequest is recorded for the first time in Communication Service by Client API Service or File Ingestion Service. At this stage, CommunicationRequest and Recipient entries are created using values obtained from user requests. 
+- `QUEUED_FOR_PROCESSING`: Communication is queued for a processing.
 - `CONTENT_RESOLVED`: The content and sender info for the communication is resolved by the Message Service and is saved in the Communication table.
-- `QUEUED`: Communication is queued for a delivery attempt.
+- `QUEUED_FOR_DELIVERY`: Communication is queued for a delivery attempt.
 - `SCHEDULED`: Communication is scheduled to be attempted at a specific time.
 - `DELIVERY_ATTEMPTED`: The Communication is attempted for delivery.
 - `DELIVERY_SUCCEEDED`: The Communication is successfully delivered. And the DeliveryResult table is updated.

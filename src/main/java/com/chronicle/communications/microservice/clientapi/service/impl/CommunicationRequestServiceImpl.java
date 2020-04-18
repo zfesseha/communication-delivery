@@ -3,10 +3,10 @@ package com.chronicle.communications.microservice.clientapi.service.impl;
 import com.chronicle.communications.common.CommunicationDeliveryException;
 import com.chronicle.communications.common.model.Communication;
 import com.chronicle.communications.common.model.CommunicationRequest;
-import com.chronicle.communications.common.model.ImmutableCommunication;
 import com.chronicle.communications.common.model.ImmutableCommunicationRequest;
 import com.chronicle.communications.common.service.queue.QueueingService;
 import com.chronicle.communications.microservice.clientapi.service.CommunicationRequestService;
+import com.chronicle.communications.microservice.communication.CommunicationMicroService;
 import com.chronicle.communications.microservice.scheduling.SchedulingMicroService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.slf4j.Logger;
@@ -14,16 +14,19 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import java.util.UUID;
+import java.time.OffsetDateTime;
 
 @Component
 public class CommunicationRequestServiceImpl implements CommunicationRequestService {
 
+    private CommunicationMicroService communicationMicroService;
     private QueueingService queueingService;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SchedulingMicroService.class);
 
-    public CommunicationRequestServiceImpl(@Qualifier("requestQueueingService") QueueingService queueingService) {
+    public CommunicationRequestServiceImpl(CommunicationMicroService communicationMicroService,
+                                           @Qualifier("requestQueueingService") QueueingService queueingService) {
+        this.communicationMicroService = communicationMicroService;
         this.queueingService = queueingService;
     }
 

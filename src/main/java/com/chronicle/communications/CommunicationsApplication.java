@@ -12,4 +12,6 @@ public class CommunicationsApplication {
 		SpringApplication.run(CommunicationsApplication.class, args);
 	}
 
+	// TODO: Logging config
+	// TODO: Global error handling
 }

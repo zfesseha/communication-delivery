@@ -2,8 +2,6 @@ package com.chronicle.communications.microservice.scheduling;
 
 import com.chronicle.communications.common.CommunicationDeliveryException;
 import com.chronicle.communications.common.model.Communication;
-import com.chronicle.communications.common.model.CommunicationRequest;
-import com.chronicle.communications.common.model.ImmutableCommunication;
 import com.chronicle.communications.common.service.queue.QueueingService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,8 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
-
-import java.util.UUID;
 
 @Component
 public class SchedulingMicroService {

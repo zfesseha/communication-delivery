@@ -2,7 +2,6 @@ package com.chronicle.communications.microservice.clientapi.controller;
 
 import com.chronicle.communications.common.model.CommunicationRequest;
 import com.chronicle.communications.microservice.clientapi.service.CommunicationRequestService;
-import com.chronicle.communications.microservice.queueing.QueuingServiceClient;
 import com.google.common.collect.ImmutableList;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -39,7 +38,6 @@ public class ClientAPIController {
     public CommunicationRequest create(@RequestBody CommunicationRequest communicationRequest,
                                        @RequestHeader Map<String, String> headers) {
         System.out.println(communicationRequest);
-        communicationRequestService.process(communicationRequest);
-        return communicationRequest;
+        return communicationRequestService.process(communicationRequest);
     }
 }

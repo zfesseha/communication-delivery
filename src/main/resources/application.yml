@@ -20,3 +20,8 @@ spring:
     pool:
       max-connections: 10
       enabled: true
+
+logging:
+  level:
+    com:
+      chronicle: DEBUG

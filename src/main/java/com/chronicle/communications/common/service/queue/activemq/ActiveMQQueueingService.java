@@ -6,27 +6,26 @@ import com.chronicle.communications.common.service.queue.destination.Destination
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.jms.core.JmsTemplate;
-import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.stereotype.Component;
 
 public class ActiveMQQueueingService implements QueueingService {
 
+    private JmsTemplate jmsTemplate;
     private DestinationResolver destinationResolver;
     private ObjectMapper objectMapper;
 
-    @Autowired
-    public ActiveMQQueueingService(DestinationResolver destinationResolver,
+    public ActiveMQQueueingService(JmsTemplate jmsTemplate,
+                                   DestinationResolver destinationResolver,
                                    ObjectMapper objectMapper) {
+        this.jmsTemplate = jmsTemplate;
         this.destinationResolver = destinationResolver;
         this.objectMapper = objectMapper;
     }
 
     @Override
-    @SendTo("aasdf.asdsss")
     public String sendToQueue(Communication communication) throws JsonProcessingException {
         String destination = destinationResolver.destination(communication);
         String message = objectMapper.writeValueAsString(communication);
-//        jmsTemplate.convertAndSend(destination, message);
+        jmsTemplate.convertAndSend(destination, message);
         return message;
     }
 }

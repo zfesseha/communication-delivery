@@ -33,19 +33,21 @@ public class CommunicationRequestServiceImpl implements CommunicationRequestServ
     }
 
     @Override
-    public CommunicationDTO process(CommunicationRequest communicationRequest) {
-        CommunicationDTO communicationDTO = ImmutableCommunicationDTO.builder()
-                .communicationRequest(communicationRequest)
-                .communication(
-                        ImmutableCommunication.builder()
-                                .id(UUID.randomUUID())
-                                .type(communicationRequest.type())
-                                .clientId(communicationRequest.clientId())
-                                .batchId(communicationRequest.batchId())
-                                .build()
-                )
+    public CommunicationRequest process(CommunicationRequest communicationRequest) {
+        CommunicationRequest request = ImmutableCommunicationRequest.builder()
+                .from(communicationRequest)
+                .requestTime(OffsetDateTime.now())
                 .build();
-        String result = queuingServiceClient.queue(communicationDTO.communication());
-        return communicationDTO;
+        Communication communication = communicationMicroService.create(request);
+        try {
+            LOGGER.debug("Sending communication to request queue, {}", communication);
+            this.queueingService.sendToQueue(communication);
+            communication = communicationMicroService.logEvent(communication.id(), QUEUED_FOR_PROCESSING);
+            LOGGER.info("Successfully sent communication to request queue, {}", communication);
+        } catch (JsonProcessingException e) {
+            LOGGER.error("There was a problem sending message {}.", communication, e);
+            throw new CommunicationDeliveryException("There was a problem sending message: " + communication);
+        }
+        return communication.communicationRequest();
     }
 }
